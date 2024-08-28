@@ -36,10 +36,10 @@ CHECK_ROOT
 dnf module disable nodejs -y &>>$LOGFILE
 VALIDATE $? "Disable default nodejs"
 
-dnf module enable nodejs:20 -y &>>LOGFILE
+dnf module enable nodejs:20 -y &>>$LOGFILE
 VALIDATE $? "Enable nodejs:20"
 
-dnf install nodejs -y &>>LOGFILE
+dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "Install nodejs"
 
 id expense @>>$LOGFILE
