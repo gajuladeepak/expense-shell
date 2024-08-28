@@ -62,3 +62,23 @@ cd /app
 rm -rf /app/* #remove the existing code
 unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Extracting backend application code"
+
+npm install &>>&LOGFILE
+cp home/ec2-user/expence-shell/backend.service  /etc/systemd/system/backend.service
+
+# load the data before running backend
+
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "Installing MYSQL Client"
+
+mysql -h backend.deepakaws.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Schema Loading"
+
+systemctl daemon-reload &>>$LOGFILE
+VALIDATE $? "Demon reload"
+
+systemctl enable backend &>>$LOGFILE
+VALIDATE $? "Enabled backend"
+
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restarted Backend"
