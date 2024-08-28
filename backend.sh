@@ -30,17 +30,24 @@ VALIDATE(){
     fi
 }
 
-echo "Script started executing at: $(date)" &>>LOGFILE | tee -a $LOGFILE
+echo "Script started executing at: $(date)" | tee -a $LOGFILE
 CHECK_ROOT
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>$LOGFILE
 VALIDATE $? "Disable default nodejs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>LOGFILE
 VALIDATE $? "Enable nodejs:20"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>LOGFILE
 VALIDATE $? "Install nodejs"
 
-useradd expense
-VALIDATE $? "Creating Expense User"
+id expense @>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    echo -e "expense user not exists... $G Creating User $N"
+    useradd expense &>>$LOGFILE
+    VALIDATE $? "Creating Expense User"
+else
+    echo -e "Expence user already exists... $Y SKIPPING $N"
+fi
