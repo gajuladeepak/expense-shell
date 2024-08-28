@@ -42,7 +42,7 @@ VALIDATE $? "Enabled MySQL Server"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Started MySQL Server"
 
-mysql -h 44.210.91.227 -u root -pExpenseApp@1 -e 'show databases;' &>>LOGFILE
+mysql -h backend.deepakaws.online -u root -pExpenseApp@1 -e 'show databases;' &>>LOGFILE
 if [ $? -ne 0 ]
 then
     echo "Mysql root password is not setup setting now..." &>>$LOGFILE
