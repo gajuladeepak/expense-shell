@@ -71,7 +71,7 @@ cp /home/ec2-user/expence-shell/backend.service  /etc/systemd/system/backend.ser
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installing MYSQL Client"
 
-mysql -h backend.deepakaws.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOGFILE
+mysql -h mysql.deepakaws.online -uroot -pExpenseApp@1 < /app/schema/backend.sql &>>$LOGFILE
 VALIDATE $? "Schema Loading"
 
 systemctl daemon-reload &>>$LOGFILE
