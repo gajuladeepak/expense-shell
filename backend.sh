@@ -51,7 +51,7 @@ VALIDATE $? "Installing nodejs"
 id expense
 if [ $? -ne 0 ]
 then
-    echo "Expense user id not created..... $Y CREATE THE USER $N" | tee -a $LOG_FILE
+    echo -e "Expense user id not created..... $Y CREATE THE USER $N" | tee -a $LOG_FILE
     useradd expense
     VALIDATE $? "Creating User"
 else:
