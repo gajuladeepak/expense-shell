@@ -57,3 +57,17 @@ then
 else
     echo -e "$Y Already User Has Been Created $N" 
 fi
+
+mkdir /app
+VALIDATE $? "Creating/app folder"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOG_FILE
+VALIDATE $? "Downloading the code"
+
+cd /app
+rm -rf /app/*
+unzip /tmp/backend.zip &>>$LOG_FILE
+VALIDATE $? "Extracting the code"
+
+npm install &>>$LOG_FILE
+VALIDATE $? "Installing the dependencies"
