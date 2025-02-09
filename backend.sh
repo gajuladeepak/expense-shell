@@ -54,6 +54,6 @@ then
     echo -e "Expense user id not created..... $G CREATE THE USER $N" 
     useradd expense
     VALIDATE $? "Creating User"
-else:
+else
     echo -e "$Y Already User Has Been Created $N" 
 fi
