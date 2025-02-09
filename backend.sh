@@ -25,6 +25,8 @@ VALIDATE () {
         echo -e "$2 is.... $R FAILED $N" | tee -e $LOG_FILE
     else
         echo -e "$2 is.... $G SUCCESS $N" | tee -e $LOG_FILE
+
+    fi
 }
 
 CHECK_ROOT
