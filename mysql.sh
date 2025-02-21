@@ -25,9 +25,9 @@ CHECK_ROOT(){
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo -e "$2 is ...... $R FAILURE $N"
+        echo -e "$2 is ...... $R FAILURE $N" | tee -a $LOGFILE
     else
-        echo -e "$2 is ...... $G SUCCCESS $N"      
+        echo -e "$2 is ...... $G SUCCCESS $N" | tee -a $LOGFILE    
 
     fi
 }
@@ -37,3 +37,22 @@ CHECK_ROOT
 dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "Installing mysql-server"
 
+
+systemctl enable mysqld
+VALIDATE $? "Enable MYSQL"
+
+systemctl start mysqld
+VALIDATE $? "START MYSQL"
+
+
+mysql -h mysql.deepakaws.online -u root -p ExpenseApp@1
+if [ $? -ne 0 ]
+then
+    echo -e "NEED TO SETUP ROOT PASSWORD... $Y SETTING UP ROOT PASSWORD $N"
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    VALIDATE $? "Setting up root password"
+
+else
+    echo "Root Password Is Already Setup"
+
+fi
