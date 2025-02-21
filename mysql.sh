@@ -7,7 +7,7 @@ N="\e[0m"
 
 LOG_FOLDER="/var/log/expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-TIMESTAMP=$(date +Y-%m-%d-%H-%M-%S)
+TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOGFILE="$LOG_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
 mkdir -p $LOG_FOLDER
 
