@@ -22,5 +22,18 @@ CHECK_ROOT(){
     fi
 }
 
+VALIDATE(){
+    if [ $1 -ne 0 ]
+    then
+        echo -e "$2 is ...... $R FAILURE $N"
+    else
+        echo -e "$2 is ...... $G SUCCCESS $N"      
+
+    fi
+}
+
 CHECK_ROOT
+
+dnf install mysql-server -y &>>$LOGFILE
+VALIDATE $? "Installing mysql-server"
 
