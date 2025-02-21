@@ -36,24 +36,24 @@ CHECK_ROOT
 
 echo "Script started execution at: $(data)" | tee -a $LOG_FILE
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>>LOG_FILE
 VALIDATE $? "Disabling NODEJS"
 
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y &>>LOG_FILE
 VALIDATE $? "Enabling NODEJS"
 
-dnf install nodejs -y
+dnf install nodejs -y &>>LOG_FILE
 VALIDATE $? "Installing NODEJS"
 
-id expense
+id expense &>>LOG_FILE
 if [ $? -ne 0 ]
 then
     echo -e "$Y NO SUCH USER $N"
     echo -e "$Y Creating USER $N"
-    useradd expense
+    useradd expense &>>LOG_FILE
     VALIDATE $? "Created USER"
 else
-    echo -e " $Y User is already Created"
+    echo -e " $Y User is already Created $N"
 fi
 
