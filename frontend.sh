@@ -56,7 +56,7 @@ unzip /tmp/frontend.zip &>>$LOGFILE
 
 VALIDATE $? "Extract frontend code"
 
-cp /home/ec2-user/expence-shell/expence.conf /etc/nginx/default.d/expense.conf
+cp /home/ec2-user/expense-shell/expence.conf /etc/nginx/default.d/expense.conf
 VALIDATE $? "Copied expense conf"
 
 
