@@ -45,7 +45,7 @@ systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "START MYSQL"
 
 
-mysql -h mysql.deepakaws.online -u root -p ExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h mysql.deepakaws.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
     echo -e "NEED TO SETUP ROOT PASSWORD... $Y SETTING UP ROOT PASSWORD $N" &>>$LOGFILE
