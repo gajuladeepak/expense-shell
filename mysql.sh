@@ -38,21 +38,21 @@ dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "Installing mysql-server"
 
 
-systemctl enable mysqld
+systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "Enable MYSQL"
 
-systemctl start mysqld
+systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "START MYSQL"
 
 
-mysql -h mysql.deepakaws.online -u root -p ExpenseApp@1
+mysql -h mysql.deepakaws.online -u root -p ExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    echo -e "NEED TO SETUP ROOT PASSWORD... $Y SETTING UP ROOT PASSWORD $N"
+    echo -e "NEED TO SETUP ROOT PASSWORD... $Y SETTING UP ROOT PASSWORD $N" &>>$LOGFILE
     mysql_secure_installation --set-root-pass ExpenseApp@1
     VALIDATE $? "Setting up root password"
 
 else
-    echo "Root Password Is Already Setup"
+    echo -e "Root Password Is Already Setup....$Y Skip the step $N" | tee -a $LOGFILE
 
 fi
